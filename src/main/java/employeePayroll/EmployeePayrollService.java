@@ -48,6 +48,18 @@ public class EmployeePayrollService {
 		this.data.add(new EmployeePayrollData(emp_id, emp_salary, emp_name));
 	}
 	
+	public long countEntries() throws IOException {
+		long entries = 0;
+		try {
+			entries = Files.lines(new File("C:\\Users\\iamat\\eclipse-workspace\\Employee-Payroll\\lib\\files\\EmployeeData.txt").toPath())
+				.count();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return entries;
+	}
+	
 	public void printData() {
 		try {
 			Files.lines(new File("C:\\Users\\iamat\\eclipse-workspace\\Employee-Payroll\\lib\\files\\EmployeeData.txt").toPath())
@@ -65,5 +77,7 @@ public class EmployeePayrollService {
 		service.writeData(ServiceTypeEnum.FILE);
 		System.out.println();
 		service.printData();
+		System.out.println();
+		System.out.println("Number of entries in the file: " + service.countEntries());
 	}
 }
